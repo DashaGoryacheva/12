@@ -38,12 +38,12 @@ svg:hover {
   align-items: center;
   padding-left: 30px;
   box-sizing: border-box;
+  box-shadow: var(--grey-shadow);
 }
 .music-app-text {
   font-size: 25px;
   color: #477ab2;
   font-weight: bold;
-  text-shadow: 1px 1px 2px #87b0dc;
 }
 .navigation-block-button:hover {
   text-decoration: underline;
@@ -59,4 +59,15 @@ svg:hover {
   text-decoration: none;
   text-align: start;
   padding-left: 40px;
+}
+
+@media (max-width: 576px) {
+  .music-app-text {
+    display: none;
+  }
+  .navigation-block-button {
+    padding-left: 10px;
+    width: 150px;
+    font-size: 12px;
+  }
 }
