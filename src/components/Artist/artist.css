@@ -87,7 +87,7 @@
   grid-template-rows: 62px 62px 62px 62px;
   gap: 6px;
   max-height: 750px;
-  padding: 0px 14px;
+  padding: 0px 14px 14px 14px;
 }
 .popular-songs {
   grid-template-columns: 420px 420px 420px 420px;
