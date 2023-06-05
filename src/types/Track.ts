@@ -24,6 +24,5 @@ export interface ArtistInfoOfTrack {
   artist: {
     id: string;
     name: string;
-    "sort-name": string;
   };
 }

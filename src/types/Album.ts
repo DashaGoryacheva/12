@@ -10,6 +10,7 @@ interface AlbumMedia {
 }
 export interface AlbumTracks extends BaseType {
   position: number;
+  recording: BaseType;
 }
 
 export interface AlbumWithArtistInfo {

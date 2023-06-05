@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import "./searchBlock.css";
 import { GrSearch } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
-
 import { TrackForSearch } from "../../types/Track";
 interface SearchBlockProps {
   itemsArrayChange: (result: Array<TrackForSearch>) => void;
@@ -26,7 +25,7 @@ function SearchBlock(props: SearchBlockProps) {
               props.handlerChange(event.target.value);
             }}
             //при нажатии enter value попадает в поле searchblock и результат запроса searchTrack попадает в state App
-            onKeyDown={(e: any) => {
+            onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
                 //при изменении ввода value попадает в поле searchblock
@@ -35,7 +34,7 @@ function SearchBlock(props: SearchBlockProps) {
                   return;
                 } else {
                   props.trackSearch(props.value).then((res) => {
-                    navigate("/");
+                    navigate("/:trackList");
                   });
                 }
               }
@@ -51,7 +50,11 @@ function SearchBlock(props: SearchBlockProps) {
           onClick={() => {
             //запрос по методу searchTrack с записью результата в state компонента App
             props.trackSearch(props.value).then((res) => {
-              navigate("/");
+              if (props.value.length === 0) {
+                return;
+              } else {
+                navigate("/:trackList");
+              }
             });
           }}
           className="search-icon"

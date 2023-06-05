@@ -17,7 +17,7 @@ type MyParams = {
   trackId: string;
 };
 
-function Track(): any {
+function Track() {
   const [trackItemArray, setTrackItemArray] = useState<Array<TrackForSearch>>();
   const { trackId } = useParams<keyof MyParams>() as MyParams;
   const [url, setUrl] = useState<string>();

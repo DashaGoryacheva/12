@@ -9,6 +9,7 @@ import populateSongsWithTime from "./utils/populateSongsWithTime";
 import { TrackForSearch } from "../types/Track";
 import { searchTrack } from "../api";
 import { Link } from "react-router-dom";
+import Placeholder from "./Placeholder";
 
 interface ComponentState {
   itemsArray: Array<TrackForSearch & { duration: string }>;
@@ -81,7 +82,7 @@ class App extends Component<ComponentProps, ComponentState> {
               }
             >
               <Route
-                path="/"
+                path="/:trackList"
                 index
                 element={
                   <TrackList
@@ -90,6 +91,7 @@ class App extends Component<ComponentProps, ComponentState> {
                   />
                 }
               />
+              <Route path="/" element={<Placeholder />} />
               <Route path="/:trackId" element={<Track />} />
               <Route path="/artist/:artistId" element={<Artist />} />
               <Route path="/album/:albumId" element={<Album />} />
