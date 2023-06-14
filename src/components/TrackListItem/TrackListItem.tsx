@@ -13,6 +13,7 @@ interface TrackListItemProps {
 function TrackListItem(props: TrackListItemProps) {
   const [url, setUrl] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   React.useEffect(() => {
     getImageById(props.track.releases[0].id)
       .then((response) => {
