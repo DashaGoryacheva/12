@@ -1,7 +1,7 @@
 import { setQueryResultArray } from "../store";
 import { searchTrack } from "../api";
 import { setStatus } from "../store";
-import { Status } from "../store";
+import Status from "../types/Status";
 
 export const searchTracks = (track_name: string): any => {
   return (dispatch: any) => {

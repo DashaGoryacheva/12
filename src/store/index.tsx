@@ -4,7 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import populateSongsWithTime from "../components/utils/populateSongsWithTime";
 import InitialState from "./typesOfGlobalState";
-import { Status } from "../types/Status";
+import Status from "../types/Status";
 
 interface StateActions<T = any> {
   type: string;

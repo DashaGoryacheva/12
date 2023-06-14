@@ -2,7 +2,7 @@ import React from "react";
 import "./trackList.css";
 import TrackListItem from "./TrackListItem";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { Status } from "../types/Status";
+import Status from "../types/Status";
 import Loader from "../loader/loader";
 
 function TrackList() {
