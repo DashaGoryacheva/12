@@ -3,40 +3,50 @@ import { Outlet } from "react-router-dom";
 import "./searchBlock.css";
 import { GrSearch } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux/es/exports";
+import { setQueryValue } from "../../store";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import store from "../../store";
+import { searchTracks } from "../../async/searchTracks";
+import InitialState from "../../store/typesOfGlobalState";
 
-import { TrackForSearch } from "../../types/Track";
-interface SearchBlockProps {
-  itemsArrayChange: (result: Array<TrackForSearch>) => void;
-  value: string;
-  handlerChange: (event: string) => void;
-  trackSearch: (inputValue: string) => Promise<void>;
-}
-function SearchBlock(props: SearchBlockProps) {
-  const enabled = props.value.length > 0;
+function SearchBlock() {
+  const queryValue = useSelector((state: InitialState) => state.queryValue);
+  const queryResultArray = useSelector(
+    (state: InitialState) => state.queryResultArray
+  );
+  const enabled = queryValue.length > 0;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  console.log(queryValue);
 
   return (
     <>
       <div className="search-block">
         <form className="search-form">
           <input
-            value={props.value}
+            value={queryValue}
             onChange={(event) => {
-              //при изменении ввода value попадает в поле searchblock
-              props.handlerChange(event.target.value);
+              //при изменении ввода query value попадает в поле searchblock
+              dispatch(setQueryValue(event.target.value));
             }}
-            //при нажатии enter value попадает в поле searchblock и результат запроса searchTrack попадает в state App
-            onKeyDown={(e: any) => {
+            //при нажатии enter query value попадает в поле searchblock и результат запроса searchTrack попадает в state App
+            onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
-                //при изменении ввода value попадает в поле searchblock
-                props.handlerChange(props.value);
-                if (props.value === "") {
+                //при изменении ввода query value попадает в поле searchblock
+                dispatch(setQueryValue(queryValue));
+
+                if (queryValue === "") {
                   return;
                 } else {
-                  props.trackSearch(props.value).then((res) => {
-                    navigate("/");
-                  });
+                  // props.trackSearch(props.value).then((res) => {
+                  //   navigate("/:trackList");
+                  // });
+
+                  store.dispatch(searchTracks(queryValue));
+                  navigate("/:trackList");
                 }
               }
             }}
@@ -49,10 +59,16 @@ function SearchBlock(props: SearchBlockProps) {
         <button
           disabled={!enabled}
           onClick={() => {
-            //запрос по методу searchTrack с записью результата в state компонента App
-            props.trackSearch(props.value).then((res) => {
+            if (queryValue.length === 0) {
+              return;
+              //запрос по методу searchTrack с записью результата в state компонента App
+            } else if (queryValue === "" && queryResultArray.length === 0) {
               navigate("/");
-            });
+            } else {
+              store.dispatch(searchTracks(queryValue));
+              navigate("/:trackList");
+            }
+            // });
           }}
           className="search-icon"
         >

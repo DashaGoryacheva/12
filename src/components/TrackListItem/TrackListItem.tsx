@@ -5,11 +5,16 @@ import { GrPlayFill } from "react-icons/gr";
 import parseDurationToString from "../utils/parseDurationToString";
 import Loader from "../../loader/loader";
 import { getImageById } from "../../api";
-function TrackListItem(props: any) {
+import { TrackForSearch } from "../../types/Track";
+import { ArtistInfoOfTrack } from "../../types/Track";
+interface TrackListItemProps {
+  track: TrackForSearch;
+}
+function TrackListItem(props: TrackListItemProps) {
   const [url, setUrl] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  React.useEffect((): any => {
+  React.useEffect(() => {
     getImageById(props.track.releases[0].id)
       .then((response) => {
         if (response.status === 404) {
@@ -59,15 +64,17 @@ function TrackListItem(props: any) {
               </Link>
             </div>
             <div className="artist">
-              {props.track["artist-credit"].map((artistItem: any) => (
-                <Link
-                  to={`/artist/${artistItem.artist.id}`}
-                  className="link"
-                  key={artistItem.artist.id}
-                >
-                  {artistItem.name}{" "}
-                </Link>
-              ))}
+              {props.track["artist-credit"].map(
+                (artistItem: ArtistInfoOfTrack) => (
+                  <Link
+                    to={`/artist/${artistItem.artist.id}`}
+                    className="link"
+                    key={artistItem.artist.id}
+                  >
+                    {artistItem.artist.name}{" "}
+                  </Link>
+                )
+              )}
             </div>
           </div>
         </div>

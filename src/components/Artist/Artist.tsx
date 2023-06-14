@@ -30,7 +30,7 @@ function Artist() {
         setArtistObject(result.artists[0].name);
       }
     });
-    const getTrack = getTrackByArtistId(artistId).then((res: any) => {
+    const getTrack = getTrackByArtistId(artistId).then((res) => {
       setTracksArray(populateSongsWithTime<TrackForSearch>(res.recordings));
     });
 
@@ -88,19 +88,19 @@ function Artist() {
           {tracksArray.length <= 4 ? (
             <div className="popular-songs-in-one-column">
               {" "}
-              {tracksArray.map((item: any) => (
+              {tracksArray.map((item) => (
                 <TrackListItem track={item} key={item.id} />
               ))}
             </div>
           ) : tracksArray.length <= 12 ? (
             <div className="popular-songs-in-two-column">
-              {tracksArray.map((item: any) => (
+              {tracksArray.map((item) => (
                 <TrackListItem track={item} key={item.id} />
               ))}
             </div>
           ) : (
             <div className="popular-songs">
-              {tracksArray.map((item: any) => (
+              {tracksArray.map((item) => (
                 <TrackListItem track={item} key={item.id} />
               ))}
             </div>

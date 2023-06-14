@@ -29,6 +29,7 @@ function Album() {
         setTracksArrayForAlbum(
           populateSongsWithTime<AlbumTracks>(result.media[0].tracks)
         );
+
         return result;
       })
       .then((res) => {
@@ -91,7 +92,7 @@ function Album() {
                 МУЗЫКАЛЬНЫЕ КОМПОЗИЦИИ НЕ НАЙДЕНЫ
               </div>
             ) : (
-              tracksArrayForAlbum.map((item: any) => (
+              tracksArrayForAlbum.map((item: AlbumTracks) => (
                 <div className="album-track-box">
                   <div className="album-track" key={item.id}>
                     <div className="number">
